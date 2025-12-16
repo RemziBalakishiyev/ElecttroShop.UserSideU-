@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { Button } from '../../../components/common/Button';
 import { useCart } from '../../../context/CartContext';
 import { useToast } from '../../../context/ToastContext';
@@ -12,11 +12,13 @@ export default function FeaturedProducts() {
     const { showToast } = useToast();
     const [activeTab, setActiveTab] = useState<'new' | 'bestseller' | 'featured'>('featured');
 
-    const { data: newArrivalData, isLoading: newArrivalLoading } = useProducts({
+    const newArrivalParams = useMemo(() => ({
         page: 1,
         pageSize: 8,
         isActive: true,
-    });
+    }), []);
+
+    const { data: newArrivalData, isLoading: newArrivalLoading } = useProducts(newArrivalParams);
 
     const { data: featuredProducts, isLoading: featuredLoading } = useFeaturedProducts();
 

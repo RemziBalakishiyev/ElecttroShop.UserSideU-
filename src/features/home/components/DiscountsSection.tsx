@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import { Button } from '../../../components/common/Button';
 import { Heart } from 'lucide-react';
 import { useCart } from '../../../context/CartContext';
@@ -12,12 +13,14 @@ export default function DiscountsSection() {
     const { isInWishlist, toggleWishlist } = useWishlist();
     const { showToast } = useToast();
 
-    // Get products with discounts
-    const { data, isLoading } = useProducts({
+    const discountParams = useMemo(() => ({
         page: 1,
         pageSize: 4,
         isActive: true,
-    });
+    }), []);
+
+    // Get products with discounts
+    const { data, isLoading } = useProducts(discountParams);
 
     const discountProducts = data?.items.filter((p) => (p.finalDiscountPercent ?? 0) > 0) || [];
 

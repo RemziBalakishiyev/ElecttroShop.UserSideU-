@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import ProductCard from './ProductCard';
 import { useProducts } from '../hooks/useProducts';
@@ -12,7 +13,7 @@ export default function ProductList() {
     const minPrice = searchParams.get('minPrice') ? parseFloat(searchParams.get('minPrice')!) : undefined;
     const maxPrice = searchParams.get('maxPrice') ? parseFloat(searchParams.get('maxPrice')!) : undefined;
 
-    const { data, isLoading, error } = useProducts({
+    const productsParams = useMemo(() => ({
         page,
         pageSize: 20,
         categoryId,
@@ -21,7 +22,9 @@ export default function ProductList() {
         minPrice,
         maxPrice,
         isActive: true,
-    });
+    }), [page, categoryId, brandId, searchTerm, minPrice, maxPrice]);
+
+    const { data, isLoading, error } = useProducts(productsParams);
 
     if (isLoading) {
         return (

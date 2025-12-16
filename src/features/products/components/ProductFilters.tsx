@@ -1,4 +1,4 @@
-import { useState, useEffect, type ReactNode } from 'react';
+import { useState, useEffect, useMemo, type ReactNode } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { ChevronDown, ChevronUp, X } from 'lucide-react';
 import { useCategories } from '../hooks/useCategories';
@@ -42,15 +42,18 @@ export default function ProductFilters() {
         searchParams.get('brandId') ? [searchParams.get('brandId')!] : []
     );
 
-    const { data: categoriesData, isLoading: categoriesLoading } = useCategories({
+    const categoriesParams = useMemo(() => ({
         page: 1,
         pageSize: 100,
-    });
+    }), []);
 
-    const { data: brandsData, isLoading: brandsLoading } = useBrands({
+    const brandsParams = useMemo(() => ({
         page: 1,
         pageSize: 100,
-    });
+    }), []);
+
+    const { data: categoriesData, isLoading: categoriesLoading } = useCategories(categoriesParams);
+    const { data: brandsData, isLoading: brandsLoading } = useBrands(brandsParams);
 
     const categories = categoriesData?.items || [];
     const brands = brandsData?.items || [];

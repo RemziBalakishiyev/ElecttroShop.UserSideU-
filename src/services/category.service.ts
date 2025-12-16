@@ -26,6 +26,17 @@ export interface CategoryListResponse {
     totalPages: number;
 }
 
+export interface LookupItem {
+    key: string;
+    value: string;
+}
+
+export interface LookupResponse {
+    items: LookupItem[];
+    cachedAt?: string;
+    cacheKey?: string;
+}
+
 export const categoryService = {
     getCategories: async (params: CategoryListParams = {}): Promise<CategoryListResponse> => {
         const response = await api.get<Category[]>('/categories', { params });
@@ -49,5 +60,15 @@ export const categoryService = {
         const response = await api.get<Category>(`/categories/slug/${slug}`);
         return response.data;
     },
+
+    /**
+     * Get categories lookup (key-value format for select boxes)
+     * Cached API - returns all active categories
+     */
+    getCategoriesLookup: async (): Promise<LookupResponse> => {
+        const response = await api.get<LookupResponse>('/categories/lookup');
+        return response.data;
+    },
 };
+
 

@@ -204,3 +204,4 @@ LIMIT 4;
 - Əgər 2-dən az element varsa, yalnız mövcud olanlar göstərilir
 - Əgər heç bir element yoxdursa, default placeholder məzmunu göstərilir
 
+

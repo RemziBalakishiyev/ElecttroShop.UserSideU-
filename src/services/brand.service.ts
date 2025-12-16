@@ -23,6 +23,17 @@ export interface BrandListResponse {
     totalPages: number;
 }
 
+export interface LookupItem {
+    key: string;
+    value: string;
+}
+
+export interface LookupResponse {
+    items: LookupItem[];
+    cachedAt?: string;
+    cacheKey?: string;
+}
+
 export const brandService = {
     getBrands: async (params: BrandListParams = {}): Promise<BrandListResponse> => {
         const response = await api.get<Brand[]>('/brands', { params });
@@ -39,6 +50,15 @@ export const brandService = {
 
     getBrandById: async (id: string): Promise<Brand> => {
         const response = await api.get<Brand>(`/brands/${id}`);
+        return response.data;
+    },
+
+    /**
+     * Get brands lookup (key-value format for select boxes)
+     * Cached API - returns all active brands
+     */
+    getBrandsLookup: async (): Promise<LookupResponse> => {
+        const response = await api.get<LookupResponse>('/brands/lookup');
         return response.data;
     },
 };
