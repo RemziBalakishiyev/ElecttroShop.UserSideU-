@@ -5,7 +5,7 @@ import { useAuth } from '../../context/AuthContext';
 import { useWishlist } from '../../context/WishlistContext';
 import { Button } from '../common/Button';
 import { Input } from '../common/Input';
-import { useState, FormEvent } from 'react';
+import { useState, type FormEvent } from 'react';
 
 export default function Header() {
     const navigate = useNavigate();

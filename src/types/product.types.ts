@@ -49,5 +49,6 @@ export interface Product {
     updatedAt?: string;
     isBanner?: boolean;
     isFeatured?: boolean;
+    isPopular?: boolean;
     displayOrder?: number | null;
 }

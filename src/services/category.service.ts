@@ -63,10 +63,10 @@ export const categoryService = {
 
     /**
      * Get categories lookup (key-value format for select boxes)
-     * Cached API - returns all active categories
+     * Cached API - pass includeAll=true to get all categories (root + children)
      */
-    getCategoriesLookup: async (): Promise<LookupResponse> => {
-        const response = await api.get<LookupResponse>('/categories/lookup');
+    getCategoriesLookup: async (params?: { includeAll?: boolean; parentId?: string }): Promise<LookupResponse> => {
+        const response = await api.get<LookupResponse>('/categories/lookup', { params });
         return response.data;
     },
 };

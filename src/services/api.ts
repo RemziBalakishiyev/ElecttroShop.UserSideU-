@@ -38,7 +38,7 @@ api.interceptors.response.use(
                 };
             } else {
                 // Handle error response
-                const errorResponse = response.data as ErrorResponse;
+                const errorResponse = response.data as unknown as ErrorResponse;
                 return Promise.reject({
                     response: {
                         ...response,

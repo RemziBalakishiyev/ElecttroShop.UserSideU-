@@ -69,7 +69,7 @@ export function getProductImageUrl(product: {
     
     // 3. imageId (fallback)
     if (product.imageId) {
-        return getImageUrl(product.imageId);
+        return getImageUrl(product.imageId, 'jpg');
     }
     
     return '/placeholder-image.jpg';
@@ -90,7 +90,7 @@ export function getProductImageUrlFromImage(image: {
     }
     
     if (image.imageId) {
-        return getImageUrl(image.imageId);
+        return getImageUrl(image.imageId, 'jpg');
     }
     
     return '/placeholder-image.jpg';

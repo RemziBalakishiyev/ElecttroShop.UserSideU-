@@ -7,7 +7,6 @@ import { Button } from '../components/common/Button';
 import { Input } from '../components/common/Input';
 import { useCart } from '../context/CartContext';
 import { getProductImageUrl } from '../utils/imageUtils';
-import { Badge } from '../components/common/Badge';
 
 const shippingSchema = Yup.object().shape({
     firstName: Yup.string().required('Ad tələb olunur'),

@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { brandService, type LookupResponse } from '../../../services/brand.service';
+import { brandService } from '../../../services/brand.service';
 
 /**
  * Hook for fetching brands lookup (key-value format for select boxes)
