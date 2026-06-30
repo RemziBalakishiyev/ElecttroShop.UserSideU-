@@ -9,7 +9,7 @@ export default function Footer() {
                     {/* Brand */}
                     <div>
                         <Link to="/" className="text-2xl font-bold tracking-tight mb-4 block">
-                            CYBER
+                            Smartal
                         </Link>
                         <p className="text-gray-400 text-sm">
                             Elektronika məhsullarının satışı ilə məşğul olan modern onlayn mağaza. 
@@ -55,7 +55,7 @@ export default function Footer() {
                     </div>
                 </div>
                 <div className="mt-12 pt-8 border-t border-gray-800 text-center text-sm text-gray-400">
-                    © {new Date().getFullYear()} Cyber. Bütün hüquqlar qorunur.
+                    © {new Date().getFullYear()} Smartal. Bütün hüquqlar qorunur.
                 </div>
             </div>
         </footer>

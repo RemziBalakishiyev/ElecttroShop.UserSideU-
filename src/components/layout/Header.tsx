@@ -28,7 +28,7 @@ export default function Header() {
                 <div className="flex h-16 items-center justify-between">
                     {/* Logo */}
                     <Link to="/" className="text-xl font-bold tracking-tight">
-                        CYBER
+                        Smartal
                     </Link>
 
                     {/* Desktop Navigation */}
