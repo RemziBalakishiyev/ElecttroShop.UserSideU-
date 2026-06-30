@@ -1,4 +1,6 @@
-const API_URL = import.meta.env.VITE_API_URL || 'https://localhost:44312/api';
+import { apiBaseUrl } from '../config/apiConfig';
+
+const API_URL = apiBaseUrl;
 
 /**
  * Normalize image URL - removes duplicate /api/ prefix

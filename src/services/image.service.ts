@@ -1,4 +1,5 @@
 import { api } from './api';
+import { apiBaseUrl } from '../config/apiConfig';
 
 export interface ImageUploadResponse {
     imageId: string;
@@ -48,11 +49,10 @@ export const imageService = {
      * @returns Full image URL
      */
     getImageUrl: (imageId: string, extension?: string): string => {
-        const baseUrl = import.meta.env.VITE_API_URL || 'https://localhost:44312/api';
         if (extension) {
-            return `${baseUrl}/images/${imageId}.${extension}`;
+            return `${apiBaseUrl}/images/${imageId}.${extension}`;
         }
-        return `${baseUrl}/images/${imageId}`;
+        return `${apiBaseUrl}/images/${imageId}`;
     },
 };
 

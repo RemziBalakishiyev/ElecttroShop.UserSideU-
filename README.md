@@ -134,17 +134,48 @@ npm run preview
 
 ### Environment Variables
 
-Create `.env` file:
+Copy `.env.example` to `.env.development` for local development:
 
 ```env
-VITE_API_URL=https://localhost:44312/api
+# .env.development
+VITE_API_BASE_URL=http://localhost:5000/api
 ```
+
+> **Production:** The `VITE_API_BASE_URL` environment variable is injected at build time via Render's Environment Variables panel. Never commit `.env.development` or `.env.production` files.
+
+## 🚀 Production Deploy (Render Static Site)
+
+### Domains
+- User frontend: https://smartal.net
+- User frontend (www): https://www.smartal.net
+- Backend API: https://api.smartal.net/api
+
+### Render Settings
+| Setting | Value |
+|---|---|
+| Branch | `main` |
+| Build Command | `npm install && npm run build` |
+| Publish Directory | `dist` |
+
+### Render Environment Variables
+```
+VITE_API_BASE_URL=https://api.smartal.net/api
+```
+
+### Render Redirects / Rewrites (React Router)
+| Source | Destination | Action |
+|---|---|---|
+| `/*` | `/index.html` | Rewrite |
+
+### Namecheap DNS
+Point `smartal.net` and `www.smartal.net` to Render Static Site custom domain per Render's DNS instructions.
 
 ## 🔌 API Integration
 
 The project integrates with a RESTful API:
 
-- **Base URL**: `https://localhost:44312/api`
+- **Base URL**: Configured via `VITE_API_BASE_URL` environment variable
+- **Production API**: `https://api.smartal.net/api`
 - **Authentication**: JWT Bearer token
 - **Response Format**: `{ isSuccess, value, error, page, pageSize, totalCount, totalPages }`
 - **Error Handling**: Automatic token refresh and error management
@@ -260,4 +291,4 @@ For questions about the project, please open an issue.
 
 ---
 
-**Note**: This project is in development stage. Additional optimizations and tests may be required for production.
+**Production**: Deployed on Render Static Site. `main` branch is the production branch. `development` branch is for local/development work.

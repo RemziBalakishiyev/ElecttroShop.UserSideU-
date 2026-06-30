@@ -12,6 +12,14 @@ dist
 dist-ssr
 *.local
 
+# Environment files (never commit secrets)
+.env
+.env.local
+.env.development
+.env.development.local
+.env.production
+.env.production.local
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
@@ -22,3 +30,9 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Claude / AI tools
+.claude/
+.cursor/
+.playwright-mcp/
+ai/

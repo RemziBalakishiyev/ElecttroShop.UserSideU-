@@ -1,7 +1,8 @@
 import axios, { type AxiosError, type AxiosResponse } from 'axios';
 import type { ApiResponse, ErrorResponse } from '../types/api.types';
+import { apiBaseUrl } from '../config/apiConfig';
 
-const API_URL = import.meta.env.VITE_API_URL || 'https://localhost:44312/api';
+const API_URL = apiBaseUrl;
 
 export const api = axios.create({
     baseURL: API_URL,
