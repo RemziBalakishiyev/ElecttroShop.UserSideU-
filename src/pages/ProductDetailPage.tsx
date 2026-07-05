@@ -1,13 +1,14 @@
 import { useParams, Link } from 'react-router-dom';
 import { useState, useMemo } from 'react';
-import { Heart, ShoppingCart, ChevronDown, ChevronUp, CheckCircle, XCircle } from 'lucide-react';
+import { Heart, ShoppingCart, CheckCircle, XCircle, Info } from 'lucide-react';
 import { Button } from '../components/common/Button';
 import { Badge } from '../components/common/Badge';
 import ProductCard from '../features/products/components/ProductCard';
 import { useCart } from '../context/CartContext';
 import { useWishlist } from '../context/WishlistContext';
 import { useToast } from '../context/ToastContext';
-import { getProductImageUrl, getProductImageUrlFromImage } from '../utils/imageUtils';
+import { getImageUrl } from '../utils/imageUrl';
+import { resolveProductImage, resolveImageEntry } from '../utils/productImage';
 import { useProductDetail } from '../features/products/hooks/useProductDetail';
 import { useProducts } from '../features/products/hooks/useProducts';
 import type { CategoryAttribute } from '../types/product.types';
@@ -48,7 +49,7 @@ export default function ProductDetailPage() {
     const { showToast } = useToast();
     const [selectedImage, setSelectedImage] = useState(0);
     const [selectedAttributes, setSelectedAttributes] = useState<Record<string, string>>({});
-    const [showDetails, setShowDetails] = useState(true);
+    const [showDetails, setShowDetails] = useState(false);
 
     const { data: product, isLoading, error } = useProductDetail(id || '');
 
@@ -74,7 +75,7 @@ export default function ProductDetailPage() {
 
         if (product.images && product.images.length > 0) {
             return [...product.images]
-                .sort((a, b) => a.displayOrder - b.displayOrder)
+                .sort((a, b) => (a.displayOrder ?? 0) - (b.displayOrder ?? 0))
                 .map((img) => ({
                     id: img.id,
                     imageId: img.imageId,
@@ -145,6 +146,14 @@ export default function ProductDetailPage() {
         );
     };
 
+    const SPEC_PREVIEW_ROWS = 5;
+    const attrPairs: [CategoryAttribute, CategoryAttribute | null][] = [];
+    for (let i = 0; i < attributes.length; i += 2) {
+        attrPairs.push([attributes[i], attributes[i + 1] ?? null]);
+    }
+    const visiblePairs = showDetails ? attrPairs : attrPairs.slice(0, SPEC_PREVIEW_ROWS);
+    const hasMoreSpecs = attrPairs.length > SPEC_PREVIEW_ROWS;
+
     const handleAttributeSelect = (attributeId: string, valueId: string) => {
         setSelectedAttributes((prev) => ({ ...prev, [attributeId]: valueId }));
     };
@@ -193,9 +202,13 @@ export default function ProductDetailPage() {
                                         }`}
                                     >
                                         <img
-                                            src={getProductImageUrlFromImage({ imageUrl: img.imageUrl, imageId: img.imageId })}
+                                            src={getImageUrl(resolveImageEntry({ imageUrl: img.imageUrl, id: img.imageId }))}
                                             alt={img.alt}
                                             className="h-full w-full object-contain p-1"
+                                            onError={(e) => {
+                                                const target = e.target as HTMLImageElement;
+                                                target.src = '/placeholder.png';
+                                            }}
                                         />
                                     </button>
                                 ))}
@@ -205,16 +218,20 @@ export default function ProductDetailPage() {
                         <div className="flex-1 overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-gray-100">
                             <div className="aspect-square">
                                 <img
-                                    src={
+                                    src={getImageUrl(
                                         images[selectedImage]
-                                            ? getProductImageUrlFromImage({
+                                            ? resolveImageEntry({
                                                   imageUrl: images[selectedImage].imageUrl,
-                                                  imageId: images[selectedImage].imageId,
+                                                  id: images[selectedImage].imageId,
                                               })
-                                            : getProductImageUrl(product)
-                                    }
+                                            : resolveProductImage(product),
+                                    )}
                                     alt={product.name}
                                     className="h-full w-full object-contain p-6"
+                                    onError={(e) => {
+                                        const target = e.target as HTMLImageElement;
+                                        target.src = '/placeholder.png';
+                                    }}
                                 />
                             </div>
                         </div>
@@ -345,40 +362,54 @@ export default function ProductDetailPage() {
                 </div>
 
                 {attributes.length > 0 && (
-                    <div className="mb-12 rounded-2xl bg-white p-6 shadow-sm ring-1 ring-gray-100 lg:p-8">
-                        <div className="mb-6 flex items-center justify-between">
-                            <h2 className="text-2xl font-bold text-gray-900">Detallar</h2>
-                            <button
-                                onClick={() => setShowDetails(!showDetails)}
-                                className="flex items-center gap-2 text-sm text-gray-500 transition-colors hover:text-gray-900"
-                            >
-                                {showDetails ? 'Daha az göstər' : 'Daha çox göstər'}
-                                {showDetails ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
-                            </button>
+                    <div className="mb-12 overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-gray-100">
+                        <div className="flex items-center justify-between border-b border-gray-100 px-6 py-5 lg:px-8">
+                            <h2 className="text-xl font-bold text-gray-900">Xüsusiyyətlər</h2>
+                            <a href="mailto:support@electronicsone.az" className="text-sm text-blue-500 hover:underline">
+                                Uyğunsuzluq aşkar etmisən?{' '}
+                                <span className="font-semibold">Bizə yaz</span>
+                            </a>
                         </div>
 
-                        {showDetails && (
-                            <div className="space-y-8">
-                                {attributes.map((attr) => (
-                                    <div key={attr.id}>
-                                        <h3 className="mb-4 font-semibold text-gray-900">{attr.displayName}</h3>
-                                        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
-                                            {[...attr.values]
-                                                .sort((a, b) => a.displayOrder - b.displayOrder)
-                                                .map((value) => (
-                                                    <div
-                                                        key={value.id}
-                                                        className="rounded-lg border border-gray-100 bg-gray-50 px-4 py-3"
-                                                    >
-                                                        <div className="text-sm font-medium text-gray-900">
-                                                            {value.displayValue}
-                                                        </div>
-                                                    </div>
-                                                ))}
-                                        </div>
+                        <div>
+                            {visiblePairs.map(([left, right], rowIndex) => (
+                                <div
+                                    key={rowIndex}
+                                    className={`grid grid-cols-2 divide-x divide-gray-100 border-b border-gray-100 last:border-b-0 ${rowIndex % 2 === 1 ? 'bg-gray-50/60' : 'bg-white'}`}
+                                >
+                                    <div className="flex items-center justify-between px-6 py-3 lg:px-8">
+                                        <span className="flex items-center gap-1 text-sm text-gray-500">
+                                            {left.displayName}
+                                            <Info className="h-3.5 w-3.5 shrink-0 text-gray-300" />
+                                        </span>
+                                        <span className="ml-4 text-right text-sm font-semibold text-gray-900">
+                                            {getAttributeValues(left) || '—'}
+                                        </span>
                                     </div>
-                                ))}
-                            </div>
+                                    {right ? (
+                                        <div className="flex items-center justify-between px-6 py-3 lg:px-8">
+                                            <span className="flex items-center gap-1 text-sm text-gray-500">
+                                                {right.displayName}
+                                                <Info className="h-3.5 w-3.5 shrink-0 text-gray-300" />
+                                            </span>
+                                            <span className="ml-4 text-right text-sm font-semibold text-gray-900">
+                                                {getAttributeValues(right) || '—'}
+                                            </span>
+                                        </div>
+                                    ) : (
+                                        <div />
+                                    )}
+                                </div>
+                            ))}
+                        </div>
+
+                        {hasMoreSpecs && (
+                            <button
+                                onClick={() => setShowDetails(!showDetails)}
+                                className="w-full border-t border-gray-100 bg-gray-50 py-3.5 text-sm text-gray-500 transition-colors hover:bg-gray-100 hover:text-gray-700"
+                            >
+                                {showDetails ? 'Daha az göstər' : 'Hamısını göstər ...'}
+                            </button>
                         )}
                     </div>
                 )}

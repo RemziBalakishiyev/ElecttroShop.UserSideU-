@@ -1,9 +1,11 @@
 export interface ProductImage {
-    id: string;
-    imageId: string;
-    imageUrl: string;
-    displayOrder: number;
-    isPrimary: boolean;
+    id?: string;
+    imageId?: string;
+    imageUrl?: string;
+    url?: string;
+    imagePath?: string;
+    displayOrder?: number;
+    isPrimary?: boolean;
 }
 
 export interface CategoryAttributeValue {
@@ -39,8 +41,11 @@ export interface Product {
     brandName: string;
     stock: number;
     imageUrl?: string | null;
+    mainImageUrl?: string | null;
+    thumbnailUrl?: string | null;
+    imagePath?: string | null;
     imageId?: string | null;
-    primaryImageUrl?: string | null; // Backend-dən avtomatik set edilir (extension ilə)
+    primaryImageUrl?: string | null; // Backend-dən avtomatik set edilir (Cloudinary URL və ya köhnə path)
     images?: ProductImage[]; // GetProductById-dən qayıdanda mövcuddur
     categoryAttributes?: CategoryAttribute[]; // GetProductById-dən qayıdanda mövcuddur
     isActive?: boolean;

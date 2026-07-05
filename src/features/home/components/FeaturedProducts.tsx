@@ -3,7 +3,8 @@ import { Link } from 'react-router-dom';
 import { Button } from '../../../components/common/Button';
 import { useCart } from '../../../context/CartContext';
 import { useToast } from '../../../context/ToastContext';
-import { getProductImageUrl } from '../../../utils/imageUtils';
+import { getImageUrl } from '../../../utils/imageUrl';
+import { resolveProductImage } from '../../../utils/productImage';
 import { useProducts } from '../../products/hooks/useProducts';
 import { useFeaturedProducts } from '../../products/hooks/useFeaturedProducts';
 import type { Product } from '../../../types/product.types';
@@ -27,7 +28,7 @@ interface ProductCardProps {
 }
 
 function ProductCard({ product, onAddToCart }: ProductCardProps) {
-    const imageUrl = getProductImageUrl(product);
+    const imageUrl = getImageUrl(resolveProductImage(product));
     const hasDiscount = (product.finalDiscountPercent ?? 0) > 0;
 
     return (
@@ -39,6 +40,10 @@ function ProductCard({ product, onAddToCart }: ProductCardProps) {
                             src={imageUrl}
                             alt={product.name}
                             className="h-full w-full object-contain p-4 transition-transform duration-300 group-hover:scale-105"
+                            onError={(e) => {
+                                const target = e.target as HTMLImageElement;
+                                target.src = '/placeholder.png';
+                            }}
                         />
                     ) : (
                         <span className="text-sm text-gray-400">Şəkil yoxdur</span>

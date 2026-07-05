@@ -3,7 +3,8 @@ import { Heart, ShoppingBag, ArrowUpRight } from 'lucide-react';
 import { useCart } from '../../../context/CartContext';
 import { useWishlist } from '../../../context/WishlistContext';
 import { useToast } from '../../../context/ToastContext';
-import { getProductImageUrl } from '../../../utils/imageUtils';
+import { getImageUrl } from '../../../utils/imageUrl';
+import { resolveProductImage } from '../../../utils/productImage';
 import type { Product } from '../../../types/product.types';
 
 interface ProductCardProps {
@@ -50,12 +51,12 @@ export default function ProductCard({ product }: ProductCardProps) {
                 <Link to={`/products/${product.id}`} className="relative block">
                     <div className="relative flex aspect-square items-center justify-center overflow-hidden rounded-xl bg-gradient-to-br from-slate-50 via-gray-50 to-gray-100">
                         <img
-                            src={getProductImageUrl(product)}
+                            src={getImageUrl(resolveProductImage(product))}
                             alt={product.name}
                             className="h-[85%] w-[85%] object-contain transition-transform duration-500 group-hover:scale-110"
                             onError={(e) => {
                                 const target = e.target as HTMLImageElement;
-                                target.src = '/placeholder-image.jpg';
+                                target.src = '/placeholder.png';
                             }}
                         />
 

@@ -1,5 +1,4 @@
 import { api } from './api';
-import { apiBaseUrl } from '../config/apiConfig';
 
 export interface ImageUploadResponse {
     imageId: string;
@@ -40,19 +39,6 @@ export const imageService = {
             `/products/${productId}/images/${imageId}/primary`
         );
         return response.data;
-    },
-
-    /**
-     * Get image URL (for direct use in img src)
-     * @param imageId - Image ID
-     * @param extension - Optional extension (jpg, png, etc.)
-     * @returns Full image URL
-     */
-    getImageUrl: (imageId: string, extension?: string): string => {
-        if (extension) {
-            return `${apiBaseUrl}/images/${imageId}.${extension}`;
-        }
-        return `${apiBaseUrl}/images/${imageId}`;
     },
 };
 

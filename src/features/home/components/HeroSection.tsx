@@ -4,7 +4,8 @@ import { ChevronLeft, ChevronRight, Sparkles, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Button } from '../../../components/common/Button';
 import { useBannerProducts } from '../../products/hooks/useBannerProducts';
-import { getProductImageUrl } from '../../../utils/imageUtils';
+import { getImageUrl } from '../../../utils/imageUrl';
+import { resolveProductImage } from '../../../utils/productImage';
 import type { Product } from '../../../types/product.types';
 
 const SLIDE_INTERVAL = 6000;
@@ -82,7 +83,7 @@ interface HeroSlideContentProps {
 function HeroSlideContent({ product, accentIndex }: HeroSlideContentProps) {
     const accent = SLIDE_ACCENTS[accentIndex % SLIDE_ACCENTS.length];
     const { lead, highlight } = splitProductTitle(product.name);
-    const imageUrl = getProductImageUrl(product);
+    const imageUrl = getImageUrl(resolveProductImage(product));
     const hasDiscount = (product.finalDiscountPercent ?? 0) > 0;
     const isDefault = product.id === 'default-hero';
 
@@ -176,7 +177,7 @@ function HeroSlideContent({ product, accentIndex }: HeroSlideContentProps) {
                             className="w-full h-full object-contain p-6 md:p-8"
                             onError={(e) => {
                                 const target = e.target as HTMLImageElement;
-                                target.style.display = 'none';
+                                target.src = '/placeholder.png';
                             }}
                         />
                     ) : (

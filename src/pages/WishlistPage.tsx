@@ -4,7 +4,8 @@ import { Button } from '../components/common/Button';
 import { useWishlist } from '../context/WishlistContext';
 import { useCart } from '../context/CartContext';
 import { useToast } from '../context/ToastContext';
-import { getProductImageUrl } from '../utils/imageUtils';
+import { getImageUrl } from '../utils/imageUrl';
+import { resolveProductImage } from '../utils/productImage';
 import { Badge } from '../components/common/Badge';
 
 export default function WishlistPage() {
@@ -51,12 +52,12 @@ export default function WishlistPage() {
                         >
                             <div className="relative aspect-square mb-4 bg-gray-100 rounded-lg overflow-hidden">
                                 <img
-                                    src={getProductImageUrl(product)}
+                                    src={getImageUrl(resolveProductImage(product))}
                                     alt={product.name}
                                     className="w-full h-full object-cover"
                                     onError={(e) => {
                                         const target = e.target as HTMLImageElement;
-                                        target.src = '/placeholder-image.jpg';
+                                        target.src = '/placeholder.png';
                                     }}
                                 />
                                 <button

@@ -2,7 +2,8 @@ import { Link } from 'react-router-dom';
 import { ArrowUpRight, Flame } from 'lucide-react';
 import { Button } from '../../../components/common/Button';
 import { usePopularProducts } from '../../products/hooks/usePopularProducts';
-import { getProductImageUrl } from '../../../utils/imageUtils';
+import { getImageUrl } from '../../../utils/imageUrl';
+import { resolveProductImage } from '../../../utils/productImage';
 import type { Product } from '../../../types/product.types';
 
 function formatPrice(product: Product): string | null {
@@ -34,7 +35,7 @@ interface PopularCardProps {
 }
 
 function PopularCard({ product, index }: PopularCardProps) {
-    const imageUrl = getProductImageUrl(product);
+    const imageUrl = getImageUrl(resolveProductImage(product));
     const hasDiscount = (product.finalDiscountPercent ?? 0) > 0;
     const subtitle = getProductSubtitle(product);
     const priceLabel = formatPrice(product);
@@ -50,7 +51,7 @@ function PopularCard({ product, index }: PopularCardProps) {
                         className="h-[85%] w-[85%] object-contain transition-transform duration-300 group-hover:scale-105"
                         onError={(e) => {
                             const target = e.target as HTMLImageElement;
-                            target.src = '/placeholder-image.jpg';
+                            target.src = '/placeholder.png';
                         }}
                     />
 

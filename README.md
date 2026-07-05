@@ -139,9 +139,10 @@ Copy `.env.example` to `.env.development` for local development:
 ```env
 # .env.development
 VITE_API_BASE_URL=http://localhost:5000/api
+VITE_ASSET_BASE_URL=http://localhost:5000
 ```
 
-> **Production:** The `VITE_API_BASE_URL` environment variable is injected at build time via Render's Environment Variables panel. Never commit `.env.development` or `.env.production` files.
+> **Production:** `VITE_API_BASE_URL` and `VITE_ASSET_BASE_URL` are injected at build time via Render's Environment Variables panel. Never commit `.env.development` or `.env.production` files.
 
 ## 🚀 Production Deploy (Render Static Site)
 
@@ -160,7 +161,19 @@ VITE_API_BASE_URL=http://localhost:5000/api
 ### Render Environment Variables
 ```
 VITE_API_BASE_URL=https://api.smartal.net/api
+VITE_ASSET_BASE_URL=https://api.smartal.net
 ```
+
+### Render Static Site (User Frontend)
+| Setting | Value |
+|---|---|
+| Branch | `main` |
+| Build Command | `npm install && npm run build` |
+| Publish Directory | `dist` |
+
+Custom domains: `https://smartal.net`, `https://www.smartal.net`
+
+Product images are served either directly from Cloudinary (`imageUrl` full URLs, used as-is) or from `VITE_ASSET_BASE_URL`/`VITE_API_BASE_URL` for legacy `/uploads` paths and `imageId` lookups — see `src/utils/imageUrl.ts` and `src/utils/productImage.ts`.
 
 ### Render Redirects / Rewrites (React Router)
 | Source | Destination | Action |

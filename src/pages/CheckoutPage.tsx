@@ -6,7 +6,8 @@ import { CreditCard, Truck, CheckCircle } from 'lucide-react';
 import { Button } from '../components/common/Button';
 import { Input } from '../components/common/Input';
 import { useCart } from '../context/CartContext';
-import { getProductImageUrl } from '../utils/imageUtils';
+import { getImageUrl } from '../utils/imageUrl';
+import { resolveProductImage } from '../utils/productImage';
 
 const shippingSchema = Yup.object().shape({
     firstName: Yup.string().required('Ad tələb olunur'),
@@ -343,12 +344,12 @@ export default function CheckoutPage() {
                                     <div key={item.product.id} className="flex gap-4">
                                         <div className="w-16 h-16 bg-gray-100 rounded-lg flex-shrink-0 overflow-hidden">
                                             <img
-                                                src={getProductImageUrl(item.product)}
+                                                src={getImageUrl(resolveProductImage(item.product))}
                                                 alt={item.product.name}
                                                 className="w-full h-full object-cover"
                                                 onError={(e) => {
                                                     const target = e.target as HTMLImageElement;
-                                                    target.src = '/placeholder-image.jpg';
+                                                    target.src = '/placeholder.png';
                                                 }}
                                             />
                                         </div>

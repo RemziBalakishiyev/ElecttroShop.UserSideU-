@@ -3,7 +3,8 @@ import { Trash2, Plus, Minus, ShoppingBag } from 'lucide-react';
 import { Button } from '../components/common/Button';
 import { useCart } from '../context/CartContext';
 import { useToast } from '../context/ToastContext';
-import { getProductImageUrl } from '../utils/imageUtils';
+import { getImageUrl } from '../utils/imageUrl';
+import { resolveProductImage } from '../utils/productImage';
 import { Badge } from '../components/common/Badge';
 
 export default function CartPage() {
@@ -53,12 +54,12 @@ export default function CartPage() {
                                 <div className="flex-shrink-0">
                                     <div className="w-32 h-32 bg-gray-100 rounded-lg overflow-hidden">
                                         <img
-                                            src={getProductImageUrl(item.product)}
+                                            src={getImageUrl(resolveProductImage(item.product))}
                                             alt={item.product.name}
                                             className="w-full h-full object-cover"
                                             onError={(e) => {
                                                 const target = e.target as HTMLImageElement;
-                                                target.src = '/placeholder-image.jpg';
+                                                target.src = '/placeholder.png';
                                             }}
                                         />
                                     </div>

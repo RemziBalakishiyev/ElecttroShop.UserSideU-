@@ -3,7 +3,8 @@ import { ArrowRight, Sparkles, Star } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Button } from '../../../components/common/Button';
 import { useFeaturedProducts } from '../../products/hooks/useFeaturedProducts';
-import { getProductImageUrl } from '../../../utils/imageUtils';
+import { getImageUrl } from '../../../utils/imageUrl';
+import { resolveProductImage } from '../../../utils/productImage';
 import type { Product } from '../../../types/product.types';
 
 const CARD_THEMES = [
@@ -55,7 +56,7 @@ interface FeaturedBannerCardProps {
 function FeaturedBannerCard({ product, index, variant }: FeaturedBannerCardProps) {
     const theme = CARD_THEMES[index % CARD_THEMES.length];
     const isDark = theme.dark;
-    const imageUrl = getProductImageUrl(product);
+    const imageUrl = getImageUrl(resolveProductImage(product));
     const hasDiscount = (product.finalDiscountPercent ?? 0) > 0;
     const imageOnRight = index % 2 === 1;
 
@@ -80,6 +81,10 @@ function FeaturedBannerCard({ product, index, variant }: FeaturedBannerCardProps
                                     src={imageUrl}
                                     alt={product.name}
                                     className="h-full w-full object-contain p-3 transition-transform duration-500 group-hover:scale-110"
+                                    onError={(e) => {
+                                        const target = e.target as HTMLImageElement;
+                                        target.src = '/placeholder.png';
+                                    }}
                                 />
                             ) : (
                                 <div className="flex h-full items-center justify-center text-white/30 text-xs">
@@ -184,6 +189,10 @@ function FeaturedBannerCard({ product, index, variant }: FeaturedBannerCardProps
                                 alt={product.name}
                                 className="h-full w-full object-contain p-4 transition-transform duration-700 group-hover:scale-110"
                                 whileHover={{ rotate: imageOnRight ? -2 : 2 }}
+                                onError={(e) => {
+                                    const target = e.target as HTMLImageElement;
+                                    target.src = '/placeholder.png';
+                                }}
                             />
                         ) : (
                             <div className="flex h-full items-center justify-center text-white/30 text-sm">

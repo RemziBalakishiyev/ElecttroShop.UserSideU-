@@ -3,7 +3,8 @@ import { Link } from 'react-router-dom';
 import { ArrowRight, Percent, Sparkles } from 'lucide-react';
 import { Button } from '../../../components/common/Button';
 import { useDiscountedProducts } from '../../products/hooks/useDiscountedProducts';
-import { getProductImageUrl } from '../../../utils/imageUtils';
+import { getImageUrl } from '../../../utils/imageUrl';
+import { resolveProductImage } from '../../../utils/productImage';
 import type { Product } from '../../../types/product.types';
 
 function formatPrice(product: Product): string | null {
@@ -23,7 +24,7 @@ function ProductImageFrame({
     className?: string;
     imageClassName?: string;
 }) {
-    const imageUrl = getProductImageUrl(product);
+    const imageUrl = getImageUrl(resolveProductImage(product));
 
     return (
         <div className={`relative overflow-hidden rounded-2xl bg-white/5 ring-1 ring-white/10 ${className}`}>
@@ -33,7 +34,7 @@ function ProductImageFrame({
                 className={`h-full w-full object-contain p-4 ${imageClassName}`}
                 onError={(e) => {
                     const target = e.target as HTMLImageElement;
-                    target.src = '/placeholder-image.jpg';
+                    target.src = '/placeholder.png';
                 }}
             />
             {(product.finalDiscountPercent ?? 0) > 0 && (

@@ -4,7 +4,8 @@ import { Heart } from 'lucide-react';
 import { useCart } from '../../../context/CartContext';
 import { useWishlist } from '../../../context/WishlistContext';
 import { useToast } from '../../../context/ToastContext';
-import { getProductImageUrl } from '../../../utils/imageUtils';
+import { getImageUrl } from '../../../utils/imageUrl';
+import { resolveProductImage } from '../../../utils/productImage';
 import { useProducts } from '../../products/hooks/useProducts';
 import type { Product } from '../../../types/product.types';
 
@@ -69,12 +70,12 @@ export default function DiscountsSection() {
                         >
                             <div className="mb-4 relative h-40 w-full flex items-center justify-center">
                                 <img
-                                    src={getProductImageUrl(product)}
+                                    src={getImageUrl(resolveProductImage(product))}
                                     alt={product.name}
                                     className="h-32 w-32 object-cover rounded-lg"
                                     onError={(e) => {
                                         const target = e.target as HTMLImageElement;
-                                        target.src = '/placeholder-image.jpg';
+                                        target.src = '/placeholder.png';
                                     }}
                                 />
                                 <button
