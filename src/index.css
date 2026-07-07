@@ -3,6 +3,34 @@
 
 @theme {
   --font-sans: 'Inter', sans-serif;
+
+  /* Primary — Smartal blue */
+  --color-primary-50:  #EAF2FB;
+  --color-primary-100: #D2E2F5;
+  --color-primary-200: #A6C6EB;
+  --color-primary-300: #79A9E1;
+  --color-primary-400: #3D82D0;
+  --color-primary-500: #0057B8;  /* base */
+  --color-primary-600: #004A9F;  /* hover blue */
+  --color-primary-700: #003B7A;  /* deep / navy */
+  --color-primary-800: #002E5F;
+  --color-primary-900: #011F40;
+
+  /* Accent — Smartal orange */
+  --color-accent-50:  #FFF3E6;
+  --color-accent-100: #FFE2C2;
+  --color-accent-200: #FFC888;
+  --color-accent-300: #FFA12B;  /* soft orange */
+  --color-accent-400: #FF8C1A;
+  --color-accent-500: #FF7A00;  /* base */
+  --color-accent-600: #E86F00;  /* hover orange */
+  --color-accent-700: #C25C00;
+  --color-accent-800: #9A4900;
+  --color-accent-900: #7A3A00;
+
+  /* Dark brand surfaces */
+  --color-hero:    #05070D;  /* dark hero bg */
+  --color-surface: #0B1020;  /* surface dark */
 }
 
 :root {

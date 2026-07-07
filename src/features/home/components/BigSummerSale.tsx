@@ -38,7 +38,7 @@ function ProductImageFrame({
                 }}
             />
             {(product.finalDiscountPercent ?? 0) > 0 && (
-                <span className="absolute left-3 top-3 rounded-full bg-orange-500 px-2.5 py-1 text-xs font-bold text-white shadow-lg">
+                <span className="absolute left-3 top-3 rounded-full bg-accent-500 px-2.5 py-1 text-xs font-bold text-white shadow-lg">
                     -{product.finalDiscountPercent}%
                 </span>
             )}
@@ -91,8 +91,8 @@ export default function BigSummerSale() {
         <section className="py-16">
             <div className="container mx-auto px-4">
                 <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-gray-950 via-gray-900 to-slate-900 text-white shadow-2xl">
-                    <div className="pointer-events-none absolute -left-20 -top-20 h-64 w-64 rounded-full bg-orange-500/20 blur-3xl" />
-                    <div className="pointer-events-none absolute -bottom-24 -right-16 h-72 w-72 rounded-full bg-amber-500/15 blur-3xl" />
+                    <div className="pointer-events-none absolute -left-20 -top-20 h-64 w-64 rounded-full bg-primary-600/20 blur-3xl" />
+                    <div className="pointer-events-none absolute -bottom-24 -right-16 h-72 w-72 rounded-full bg-accent-500/15 blur-3xl" />
                     <div
                         className="pointer-events-none absolute inset-0 opacity-[0.04]"
                         style={{
@@ -114,7 +114,7 @@ export default function BigSummerSale() {
                         </div>
 
                         <div className="order-1 space-y-6 text-center md:order-2 md:max-w-sm md:px-4">
-                            <span className="inline-flex items-center gap-2 rounded-full border border-orange-400/30 bg-orange-500/10 px-4 py-1.5 text-xs font-semibold text-orange-300">
+                            <span className="inline-flex items-center gap-2 rounded-full border border-accent-400/30 bg-accent-500/10 px-4 py-1.5 text-xs font-semibold text-accent-300">
                                 <Sparkles className="h-3.5 w-3.5" />
                                 Xüsusi endirim
                             </span>
@@ -122,7 +122,7 @@ export default function BigSummerSale() {
                             <div>
                                 <h2 className="text-3xl font-bold leading-tight md:text-4xl lg:text-5xl">
                                     Böyük Yay
-                                    <span className="block bg-gradient-to-r from-orange-400 to-amber-300 bg-clip-text text-transparent">
+                                    <span className="block bg-gradient-to-r from-accent-400 to-accent-300 bg-clip-text text-transparent">
                                         Endirimi
                                     </span>
                                 </h2>
@@ -134,10 +134,10 @@ export default function BigSummerSale() {
 
                             {maxDiscount > 0 && (
                                 <div className="inline-flex items-center gap-2 rounded-2xl bg-white/5 px-5 py-3 ring-1 ring-white/10">
-                                    <Percent className="h-5 w-5 text-orange-400" />
+                                    <Percent className="h-5 w-5 text-accent-400" />
                                     <div className="text-left">
                                         <p className="text-xs text-white/50">Ən böyük endirim</p>
-                                        <p className="text-2xl font-bold text-orange-400">-{maxDiscount}%</p>
+                                        <p className="text-2xl font-bold text-accent-400">-{maxDiscount}%</p>
                                     </div>
                                 </div>
                             )}
@@ -156,7 +156,7 @@ export default function BigSummerSale() {
                                 <Link to={`/products/${mainProduct.id}`}>
                                     <Button
                                         size="lg"
-                                        className="bg-orange-500 text-white hover:bg-orange-400 border-0 shadow-lg shadow-orange-500/25"
+                                        className="bg-accent-500 text-white hover:bg-accent-600 border-0 shadow-lg shadow-accent-500/25"
                                     >
                                         Alış-veriş et
                                         <ArrowRight className="ml-2 h-4 w-4" />

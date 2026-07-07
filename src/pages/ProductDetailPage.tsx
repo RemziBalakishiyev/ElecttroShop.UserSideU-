@@ -99,7 +99,7 @@ export default function ProductDetailPage() {
 
     if (isLoading) {
         return (
-            <div className="min-h-screen bg-[#f7f7f8]">
+            <div className="min-h-screen bg-slate-50">
                 <div className="container mx-auto px-4 py-8">
                     <div className="animate-pulse space-y-8">
                         <div className="h-4 w-1/3 rounded-full bg-gray-200" />
@@ -128,7 +128,7 @@ export default function ProductDetailPage() {
                 <p className="mb-8 text-gray-500">Axtardığınız məhsul mövcud deyil</p>
                 <Link
                     to="/products"
-                    className="inline-flex items-center gap-2 rounded-2xl bg-gray-900 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-gray-700"
+                    className="inline-flex items-center gap-2 rounded-2xl bg-primary-500 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-primary-600"
                 >
                     Məhsullara qayıt
                 </Link>
@@ -162,7 +162,7 @@ export default function ProductDetailPage() {
     };
 
     return (
-        <div className="min-h-screen bg-[#f7f7f8]">
+        <div className="min-h-screen bg-slate-50">
 
             {/* Breadcrumb */}
             <div className="border-b border-gray-200 bg-white">
@@ -280,7 +280,7 @@ export default function ProductDetailPage() {
                                             </span>
                                         )}
                                         {product.finalDiscountPercent && product.finalDiscountPercent > 0 && (
-                                            <span className="pb-1 rounded-xl bg-red-50 px-3 py-1.5 text-sm font-bold text-red-600">
+                                            <span className="pb-1 rounded-xl bg-accent-50 px-3 py-1.5 text-sm font-bold text-accent-700">
                                                 -{product.finalDiscountPercent}%
                                             </span>
                                         )}
@@ -318,7 +318,7 @@ export default function ProductDetailPage() {
                                                                 title={value.displayValue}
                                                                 className={`relative h-10 w-10 rounded-full border-4 transition-all duration-200 ${
                                                                     isSelected
-                                                                        ? 'scale-110 border-gray-900 shadow-md'
+                                                                        ? 'scale-110 border-primary-600 shadow-md'
                                                                         : 'border-white shadow ring-1 ring-gray-300 hover:scale-105'
                                                                 }`}
                                                                 style={{ backgroundColor: value.colorCode || undefined }}
@@ -338,12 +338,12 @@ export default function ProductDetailPage() {
                                                             onClick={() => handleAttributeSelect(attr.id, value.id)}
                                                             className={`relative rounded-xl border-2 px-5 py-2.5 text-sm font-medium transition-all duration-200 ${
                                                                 isSelected
-                                                                    ? 'border-gray-900 bg-gray-900 text-white shadow-md'
+                                                                    ? 'border-primary-600 bg-primary-600 text-white shadow-md'
                                                                     : 'border-gray-200 bg-white text-gray-700 hover:border-gray-400 hover:shadow-sm'
                                                             }`}
                                                         >
                                                             {isSelected && (
-                                                                <span className="absolute -right-1.5 -top-1.5 flex h-4 w-4 items-center justify-center rounded-full bg-green-500 text-white">
+                                                                <span className="absolute -right-1.5 -top-1.5 flex h-4 w-4 items-center justify-center rounded-full bg-primary-500 text-white">
                                                                     <Check className="h-2.5 w-2.5" />
                                                                 </span>
                                                             )}
@@ -397,7 +397,7 @@ export default function ProductDetailPage() {
                                     disabled={!inStock}
                                     className={`flex h-14 w-full items-center justify-center gap-2.5 rounded-2xl text-base font-semibold transition-all duration-200 ${
                                         inStock
-                                            ? 'bg-gray-900 text-white shadow-lg shadow-gray-900/20 hover:bg-gray-700 active:scale-[0.98]'
+                                            ? 'bg-primary-500 text-white shadow-lg shadow-primary-500/25 hover:bg-primary-600 active:scale-[0.98]'
                                             : 'cursor-not-allowed bg-gray-100 text-gray-400'
                                     }`}
                                 >
@@ -421,7 +421,7 @@ export default function ProductDetailPage() {
                                     onClick={handleWishlistToggle}
                                     className={`flex h-12 w-full items-center justify-center gap-2.5 rounded-2xl border-2 text-sm font-medium transition-all duration-200 ${
                                         isWishlisted
-                                            ? 'border-red-200 bg-red-50 text-red-600 hover:bg-red-100'
+                                            ? 'border-accent-200 bg-accent-50 text-accent-600 hover:bg-accent-100'
                                             : 'border-gray-200 text-gray-700 hover:border-gray-300 hover:bg-gray-50'
                                     }`}
                                 >

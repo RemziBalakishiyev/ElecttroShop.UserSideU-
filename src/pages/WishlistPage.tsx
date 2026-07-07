@@ -62,7 +62,7 @@ export default function WishlistPage() {
                                 />
                                 <button
                                     onClick={() => handleRemove(product.id, product.name)}
-                                    className="absolute top-2 right-2 p-2 rounded-full bg-white text-red-500 hover:bg-red-50 transition-colors"
+                                    className="absolute top-2 right-2 p-2 rounded-full bg-white text-accent-500 hover:bg-accent-50 transition-colors"
                                 >
                                     <Heart className="h-4 w-4 fill-current" />
                                 </button>

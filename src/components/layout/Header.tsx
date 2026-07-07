@@ -1,4 +1,4 @@
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { ShoppingCart, User, Search, Menu, Heart, Phone } from 'lucide-react';
 import { useCart } from '../../context/CartContext';
 import { useAuth } from '../../context/AuthContext';
@@ -37,24 +37,33 @@ export default function Header() {
             <div className="container mx-auto px-4">
                 <div className="flex h-16 items-center justify-between">
                     {/* Logo */}
-                    <Link to="/" className="text-xl font-bold tracking-tight">
-                        Smartal
+                    <Link to="/" className="flex items-center">
+                        <img src="/logo.png" alt="Smartal" className="h-24 w-auto -my-4" />
                     </Link>
 
                     {/* Desktop Navigation */}
                     <nav className="hidden md:flex items-center gap-6">
-                        <Link to="/" className="text-sm font-medium hover:text-gray-600">
-                            Ana Səhifə
-                        </Link>
-                        <Link to="/products" className="text-sm font-medium hover:text-gray-600">
-                            Məhsullar
-                        </Link>
-                        <Link to="/about" className="text-sm font-medium hover:text-gray-600">
-                            Haqqımızda
-                        </Link>
-                        <Link to="/contact" className="text-sm font-medium hover:text-gray-600">
-                            Əlaqə
-                        </Link>
+                        {[
+                            { to: '/', label: 'Ana Səhifə' },
+                            { to: '/products', label: 'Məhsullar' },
+                            { to: '/about', label: 'Haqqımızda' },
+                            { to: '/contact', label: 'Əlaqə' },
+                        ].map(({ to, label }) => (
+                            <NavLink
+                                key={to}
+                                to={to}
+                                end={to === '/'}
+                                className={({ isActive }) =>
+                                    `relative text-sm font-medium transition-colors after:absolute after:-bottom-1 after:left-0 after:h-0.5 after:rounded-full after:bg-accent-500 after:transition-all ${
+                                        isActive
+                                            ? 'text-primary-600 after:w-full'
+                                            : 'text-gray-700 hover:text-primary-600 after:w-0 hover:after:w-full'
+                                    }`
+                                }
+                            >
+                                {label}
+                            </NavLink>
+                        ))}
                     </nav>
 
                     {/* Search Bar (Desktop) */}
@@ -73,18 +82,18 @@ export default function Header() {
 
                     {/* Actions */}
                     <div className="flex items-center gap-4">
-                        <Link to="/wishlist" className="relative">
+                        <Link to="/wishlist" className="relative text-gray-700 transition-colors hover:text-accent-500">
                             <Heart className="h-5 w-5" />
                             {wishlist.length > 0 && (
-                                <span className="absolute -top-2 -right-2 flex h-4 w-4 items-center justify-center rounded-full bg-red-600 text-[10px] font-bold text-white">
+                                <span className="absolute -top-2 -right-2 flex h-4 w-4 items-center justify-center rounded-full bg-accent-500 text-[10px] font-bold text-white">
                                     {wishlist.length}
                                 </span>
                             )}
                         </Link>
-                        <Link to="/cart" className="relative">
+                        <Link to="/cart" className="relative text-gray-700 transition-colors hover:text-accent-500">
                             <ShoppingCart className="h-5 w-5" />
                             {totalItems > 0 && (
-                                <span className="absolute -top-2 -right-2 flex h-4 w-4 items-center justify-center rounded-full bg-red-600 text-[10px] font-bold text-white">
+                                <span className="absolute -top-2 -right-2 flex h-4 w-4 items-center justify-center rounded-full bg-accent-500 text-[10px] font-bold text-white">
                                     {totalItems}
                                 </span>
                             )}
@@ -100,7 +109,7 @@ export default function Header() {
                                 </Button>
                             </div>
                         ) : (
-                            <Link to="/login">
+                            <Link to="/login" className="text-gray-700 transition-colors hover:text-accent-500">
                                 <User className="h-5 w-5" />
                             </Link>
                         )}
@@ -130,18 +139,26 @@ export default function Header() {
                         />
                     </form>
                     <nav className="flex flex-col gap-2">
-                        <Link to="/" className="text-sm font-medium py-2">
-                            Ana Səhifə
-                        </Link>
-                        <Link to="/products" className="text-sm font-medium py-2">
-                            Məhsullar
-                        </Link>
-                        <Link to="/about" className="text-sm font-medium py-2">
-                            Haqqımızda
-                        </Link>
-                        <Link to="/contact" className="text-sm font-medium py-2">
-                            Əlaqə
-                        </Link>
+                        {[
+                            { to: '/', label: 'Ana Səhifə' },
+                            { to: '/products', label: 'Məhsullar' },
+                            { to: '/about', label: 'Haqqımızda' },
+                            { to: '/contact', label: 'Əlaqə' },
+                        ].map(({ to, label }) => (
+                            <NavLink
+                                key={to}
+                                to={to}
+                                end={to === '/'}
+                                onClick={() => setIsMenuOpen(false)}
+                                className={({ isActive }) =>
+                                    `text-sm font-medium py-2 transition-colors ${
+                                        isActive ? 'text-primary-600' : 'text-gray-700 hover:text-primary-600'
+                                    }`
+                                }
+                            >
+                                {label}
+                            </NavLink>
+                        ))}
                     </nav>
                 </div>
             )}

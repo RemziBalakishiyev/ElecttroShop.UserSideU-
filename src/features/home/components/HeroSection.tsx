@@ -10,38 +10,40 @@ import type { Product } from '../../../types/product.types';
 
 const SLIDE_INTERVAL = 6000;
 
+// Smartal palette — blue ⇄ orange alternation. Each slide pairs a blue and an
+// orange orb so the glow always reads "blue + orange". Discount badge stays orange.
 const SLIDE_ACCENTS = [
     {
-        orb1: 'bg-violet-600/30',
-        orb2: 'bg-indigo-500/20',
-        gradient: 'from-violet-600/50 via-indigo-900/30 to-transparent',
-        glow: 'shadow-violet-500/25',
-        dot: 'bg-violet-400',
-        badge: 'from-violet-500 to-indigo-600',
+        orb1: 'bg-primary-600/30',
+        orb2: 'bg-accent-500/20',
+        gradient: 'from-primary-600/50 via-primary-900/30 to-transparent',
+        glow: 'shadow-primary-500/25',
+        dot: 'bg-primary-400',
+        badge: 'from-accent-500 to-accent-300',
     },
     {
-        orb1: 'bg-cyan-500/30',
-        orb2: 'bg-blue-500/20',
-        gradient: 'from-cyan-500/50 via-blue-900/30 to-transparent',
-        glow: 'shadow-cyan-500/25',
-        dot: 'bg-cyan-400',
-        badge: 'from-cyan-500 to-blue-600',
+        orb1: 'bg-accent-500/30',
+        orb2: 'bg-primary-600/20',
+        gradient: 'from-accent-500/50 via-primary-900/30 to-transparent',
+        glow: 'shadow-accent-500/25',
+        dot: 'bg-accent-400',
+        badge: 'from-accent-500 to-accent-300',
     },
     {
-        orb1: 'bg-rose-500/30',
-        orb2: 'bg-pink-500/20',
-        gradient: 'from-rose-500/50 via-pink-900/30 to-transparent',
-        glow: 'shadow-rose-500/25',
-        dot: 'bg-rose-400',
-        badge: 'from-rose-500 to-pink-600',
+        orb1: 'bg-primary-500/30',
+        orb2: 'bg-accent-400/20',
+        gradient: 'from-primary-500/50 via-primary-900/30 to-transparent',
+        glow: 'shadow-primary-500/25',
+        dot: 'bg-primary-400',
+        badge: 'from-accent-500 to-accent-300',
     },
     {
-        orb1: 'bg-amber-500/30',
-        orb2: 'bg-orange-500/20',
-        gradient: 'from-amber-500/50 via-orange-900/30 to-transparent',
-        glow: 'shadow-amber-500/25',
-        dot: 'bg-amber-400',
-        badge: 'from-amber-500 to-orange-600',
+        orb1: 'bg-accent-400/30',
+        orb2: 'bg-primary-500/20',
+        gradient: 'from-accent-400/50 via-primary-900/30 to-transparent',
+        glow: 'shadow-accent-500/25',
+        dot: 'bg-accent-400',
+        badge: 'from-accent-500 to-accent-300',
     },
 ] as const;
 
@@ -148,9 +150,8 @@ function HeroSlideContent({ product, accentIndex }: HeroSlideContentProps) {
                 >
                     <Link to={isDefault ? '/products' : `/products/${product.id}`}>
                         <Button
-                            variant="outline"
                             size="lg"
-                            className="group border-white/30 bg-white/5 text-white backdrop-blur-sm hover:bg-white hover:text-black hover:border-white transition-all duration-300"
+                            className="group border-0 bg-gradient-to-r from-accent-500 to-accent-300 text-white shadow-lg shadow-accent-500/25 hover:from-accent-600 hover:to-accent-500 transition-all duration-300"
                         >
                             Alış-veriş et
                             <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
@@ -270,7 +271,7 @@ export default function HeroSection() {
 
     return (
         <section
-            className="relative overflow-hidden bg-[#050508] text-white"
+            className="relative overflow-hidden bg-hero text-white"
             onMouseEnter={() => setIsPaused(true)}
             onMouseLeave={() => {
                 setIsPaused(false);
@@ -292,7 +293,7 @@ export default function HeroSection() {
                     transition={{ duration: 1, delay: 0.2 }}
                     className={`absolute -bottom-32 -right-32 w-[600px] h-[600px] rounded-full blur-[140px] ${currentAccent.orb2}`}
                 />
-                <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,#050508_70%)]" />
+                <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,#05070D_70%)]" />
                 <div
                     className="absolute inset-0 opacity-[0.03]"
                     style={{

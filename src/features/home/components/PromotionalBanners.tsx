@@ -7,37 +7,38 @@ import { getImageUrl } from '../../../utils/imageUrl';
 import { resolveProductImage } from '../../../utils/productImage';
 import type { Product } from '../../../types/product.types';
 
+// Smartal palette — blue ⇄ orange accents on neutral dark/light surfaces.
 const CARD_THEMES = [
     {
         bg: 'from-slate-900 via-slate-800 to-slate-900',
-        accent: 'from-violet-500/20 to-indigo-600/10',
-        glow: 'shadow-violet-500/10',
-        badge: 'bg-violet-500/20 text-violet-300 border-violet-500/30',
-        ring: 'ring-violet-500/20',
+        accent: 'from-primary-500/20 to-primary-700/10',
+        glow: 'shadow-primary-500/10',
+        badge: 'bg-primary-500/20 text-primary-200 border-primary-500/30',
+        ring: 'ring-primary-500/20',
         dark: true,
     },
     {
         bg: 'from-zinc-900 via-neutral-800 to-zinc-900',
-        accent: 'from-cyan-500/20 to-blue-600/10',
-        glow: 'shadow-cyan-500/10',
-        badge: 'bg-cyan-500/20 text-cyan-300 border-cyan-500/30',
-        ring: 'ring-cyan-500/20',
+        accent: 'from-accent-500/20 to-accent-600/10',
+        glow: 'shadow-accent-500/10',
+        badge: 'bg-accent-500/20 text-accent-200 border-accent-500/30',
+        ring: 'ring-accent-500/20',
         dark: true,
     },
     {
         bg: 'from-white to-gray-50',
-        accent: 'from-rose-500/10 to-pink-500/5',
-        glow: 'shadow-rose-500/10',
-        badge: 'bg-rose-50 text-rose-600 border-rose-200',
-        ring: 'ring-rose-500/10',
+        accent: 'from-primary-500/10 to-primary-400/5',
+        glow: 'shadow-primary-500/10',
+        badge: 'bg-primary-50 text-primary-600 border-primary-200',
+        ring: 'ring-primary-500/10',
         dark: false,
     },
     {
         bg: 'from-gray-900 to-black',
-        accent: 'from-amber-500/15 to-orange-500/5',
-        glow: 'shadow-amber-500/10',
-        badge: 'bg-amber-500/20 text-amber-300 border-amber-500/30',
-        ring: 'ring-amber-500/20',
+        accent: 'from-accent-500/15 to-accent-400/5',
+        glow: 'shadow-accent-500/10',
+        badge: 'bg-accent-500/20 text-accent-200 border-accent-500/30',
+        ring: 'ring-accent-500/20',
         dark: true,
     },
 ] as const;
@@ -251,7 +252,7 @@ export default function PromotionalBanners() {
                     className="mb-8"
                 >
                     <span className="inline-flex items-center gap-1.5 rounded-full bg-black/5 px-3 py-1 text-xs font-semibold text-gray-600 mb-3">
-                        <Star className="h-3.5 w-3.5 fill-amber-400 text-amber-400" />
+                        <Star className="h-3.5 w-3.5 fill-accent-400 text-accent-400" />
                         Seçilmiş məhsullar
                     </span>
                     <h2 className="text-2xl md:text-3xl font-bold text-gray-900">

@@ -7,7 +7,7 @@ interface BadgeProps extends HTMLAttributes<HTMLDivElement> {
 
 function Badge({ className, variant = 'default', ...props }: BadgeProps) {
     const variants = {
-        default: 'border-transparent bg-black text-white hover:bg-black/80',
+        default: 'border-transparent bg-primary-600 text-white hover:bg-primary-700',
         secondary: 'border-transparent bg-gray-100 text-gray-900 hover:bg-gray-200',
         outline: 'text-gray-950 border-gray-200',
         destructive: 'border-transparent bg-red-500 text-white hover:bg-red-500/80',

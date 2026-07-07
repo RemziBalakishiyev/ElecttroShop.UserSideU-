@@ -86,7 +86,7 @@ export default function ProductCard({ product }: ProductCardProps) {
 
                 <div className="absolute left-6 top-6 flex flex-col gap-1.5">
                     {hasDiscount && (
-                        <span className="rounded-md bg-red-500 px-2 py-0.5 text-[11px] font-bold text-white shadow-sm">
+                        <span className="rounded-md bg-accent-500 px-2 py-0.5 text-[11px] font-bold text-white shadow-sm">
                             -{product.finalDiscountPercent}%
                         </span>
                     )}
@@ -102,8 +102,8 @@ export default function ProductCard({ product }: ProductCardProps) {
                     aria-label="İstək siyahısı"
                     className={`absolute right-6 top-6 flex h-9 w-9 items-center justify-center rounded-full transition-all ${
                         isWishlisted
-                            ? 'bg-red-500 text-white shadow-lg shadow-red-500/30'
-                            : 'bg-white text-gray-400 shadow-md hover:text-red-500'
+                            ? 'bg-accent-500 text-white shadow-lg shadow-accent-500/30'
+                            : 'bg-white text-gray-400 shadow-md hover:text-accent-500'
                     }`}
                 >
                     <Heart className={`h-4 w-4 ${isWishlisted ? 'fill-current' : ''}`} />
@@ -150,13 +150,13 @@ export default function ProductCard({ product }: ProductCardProps) {
                             onClick={handleAddToCart}
                             disabled={!inStock}
                             aria-label="Səbətə əlavə et"
-                            className="flex h-9 w-9 items-center justify-center rounded-full border border-gray-200 text-gray-400 transition-all hover:border-gray-900 hover:bg-gray-900 hover:text-white disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:border-gray-200 disabled:hover:bg-transparent disabled:hover:text-gray-400"
+                            className="flex h-9 w-9 items-center justify-center rounded-full border border-gray-200 text-gray-400 transition-all hover:border-primary-600 hover:bg-primary-600 hover:text-white disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:border-gray-200 disabled:hover:bg-transparent disabled:hover:text-gray-400"
                         >
                             <ShoppingBag className="h-4 w-4" />
                         </button>
                         <Link
                             to={`/products/${product.id}`}
-                            className="flex h-9 w-9 items-center justify-center rounded-full border border-gray-200 text-gray-400 transition-all hover:border-gray-900 hover:bg-gray-900 hover:text-white"
+                            className="flex h-9 w-9 items-center justify-center rounded-full border border-gray-200 text-gray-400 transition-all hover:border-accent-500 hover:bg-accent-500 hover:text-white"
                         >
                             <ArrowUpRight className="h-4 w-4" />
                         </Link>

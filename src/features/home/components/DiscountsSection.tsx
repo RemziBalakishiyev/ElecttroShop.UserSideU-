@@ -81,7 +81,7 @@ export default function DiscountsSection() {
                                 <button
                                     onClick={(e) => handleWishlistToggle(product, e)}
                                     className={`absolute top-2 right-2 p-2 rounded-full bg-white transition-colors ${
-                                        isInWishlist(product.id) ? 'text-red-500' : 'text-gray-400 hover:text-red-500'
+                                        isInWishlist(product.id) ? 'text-accent-500' : 'text-gray-400 hover:text-accent-500'
                                     }`}
                                 >
                                     <Heart className={`h-4 w-4 ${isInWishlist(product.id) ? 'fill-current' : ''}`} />
@@ -99,7 +99,7 @@ export default function DiscountsSection() {
                                             {product.currency}{product.price}
                                         </span>
                                         {product.finalDiscountPercent && (
-                                            <span className="text-xs bg-red-100 text-red-600 px-2 py-0.5 rounded">
+                                            <span className="text-xs bg-accent-100 text-accent-700 px-2 py-0.5 rounded">
                                                 -{product.finalDiscountPercent}%
                                             </span>
                                         )}

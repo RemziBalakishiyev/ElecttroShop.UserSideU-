@@ -48,7 +48,7 @@ export default function ProductListPage() {
     const hasActiveChips = activeBrand || activeCategory || minPrice || maxPrice;
 
     return (
-        <div className="min-h-screen bg-[#f7f7f8]">
+        <div className="min-h-screen bg-slate-50">
             <div className="relative overflow-hidden border-b border-gray-200 bg-white">
                 <div className="absolute inset-0 bg-gradient-to-br from-gray-50 via-white to-slate-50" />
                 <div className="container relative mx-auto px-4 py-8">
@@ -60,7 +60,7 @@ export default function ProductListPage() {
 
                     <div className="flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
                         <div className="flex items-start gap-4">
-                            <div className="hidden h-12 w-12 items-center justify-center rounded-2xl bg-gray-900 text-white sm:flex">
+                            <div className="hidden h-12 w-12 items-center justify-center rounded-2xl bg-primary-500 text-white sm:flex">
                                 <Package className="h-5 w-5" />
                             </div>
                             <div>
@@ -87,7 +87,7 @@ export default function ProductListPage() {
                             {activeCategory && (
                                 <button
                                     onClick={() => removeFilter('categoryId')}
-                                    className="inline-flex items-center gap-1.5 rounded-full bg-gray-900 px-3 py-1.5 text-xs font-medium text-white transition-colors hover:bg-gray-700"
+                                    className="inline-flex items-center gap-1.5 rounded-full bg-primary-500 px-3 py-1.5 text-xs font-medium text-white transition-colors hover:bg-primary-600"
                                 >
                                     {activeCategory.name}
                                     <X className="h-3 w-3" />
@@ -96,7 +96,7 @@ export default function ProductListPage() {
                             {activeBrand && (
                                 <button
                                     onClick={() => removeFilter('brandId')}
-                                    className="inline-flex items-center gap-1.5 rounded-full bg-gray-900 px-3 py-1.5 text-xs font-medium text-white transition-colors hover:bg-gray-700"
+                                    className="inline-flex items-center gap-1.5 rounded-full bg-primary-500 px-3 py-1.5 text-xs font-medium text-white transition-colors hover:bg-primary-600"
                                 >
                                     {activeBrand.name}
                                     <X className="h-3 w-3" />
@@ -111,7 +111,7 @@ export default function ProductListPage() {
                                         newParams.set('page', '1');
                                         setSearchParams(newParams);
                                     }}
-                                    className="inline-flex items-center gap-1.5 rounded-full bg-gray-900 px-3 py-1.5 text-xs font-medium text-white transition-colors hover:bg-gray-700"
+                                    className="inline-flex items-center gap-1.5 rounded-full bg-primary-500 px-3 py-1.5 text-xs font-medium text-white transition-colors hover:bg-primary-600"
                                 >
                                     {minPrice || '0'} – {maxPrice || '∞'} AZN
                                     <X className="h-3 w-3" />

@@ -56,7 +56,7 @@ function PopularCard({ product, index }: PopularCardProps) {
                     />
 
                     {hasDiscount && (
-                        <span className="absolute left-2.5 top-2.5 rounded-md bg-red-500 px-2 py-0.5 text-[11px] font-semibold text-white">
+                        <span className="absolute left-2.5 top-2.5 rounded-md bg-accent-500 px-2 py-0.5 text-[11px] font-semibold text-white">
                             -{product.finalDiscountPercent}%
                         </span>
                     )}
@@ -107,7 +107,7 @@ function PopularCard({ product, index }: PopularCardProps) {
                         <Button
                             variant="outline"
                             size="sm"
-                            className="w-full border-gray-200 transition-colors group-hover:border-gray-900 group-hover:bg-gray-900 group-hover:text-white"
+                            className="w-full border-gray-200 transition-colors group-hover:border-primary-600 group-hover:bg-primary-600 group-hover:text-white"
                         >
                             Alış-veriş et
                         </Button>
@@ -161,7 +161,7 @@ export default function PopularProducts() {
         <section className="bg-gray-50 py-16">
             <div className="container mx-auto px-4">
                 <div className="mb-10 text-center sm:text-left">
-                    <span className="mb-3 inline-flex items-center gap-1.5 rounded-full bg-orange-50 px-3 py-1 text-xs font-semibold text-orange-600">
+                    <span className="mb-3 inline-flex items-center gap-1.5 rounded-full bg-accent-50 px-3 py-1 text-xs font-semibold text-accent-600">
                         <Flame className="h-3.5 w-3.5" />
                         Populyar
                     </span>

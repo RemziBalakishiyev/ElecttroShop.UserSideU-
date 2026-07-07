@@ -129,7 +129,7 @@ function FilterPanel({ onClose, isMobile }: FilterPanelProps) {
                     <SlidersHorizontal className="h-4 w-4 text-gray-500" />
                     <h2 className="text-sm font-bold text-gray-900">Filtrlər</h2>
                     {hasActiveFilters && (
-                        <span className="rounded-full bg-gray-900 px-2 py-0.5 text-[10px] font-bold text-white">
+                        <span className="rounded-full bg-primary-500 px-2 py-0.5 text-[10px] font-bold text-white">
                             Aktiv
                         </span>
                     )}
@@ -191,7 +191,7 @@ function FilterPanel({ onClose, isMobile }: FilterPanelProps) {
                                         onClick={() => handleBrandToggle(brand.id)}
                                         className={`flex w-full items-center gap-2.5 rounded-lg px-2.5 py-2 text-left text-sm transition-colors ${
                                             isSelected
-                                                ? 'bg-gray-900 text-white'
+                                                ? 'bg-primary-500 text-white'
                                                 : 'text-gray-600 hover:bg-gray-50'
                                         }`}
                                     >
@@ -219,7 +219,7 @@ function FilterPanel({ onClose, isMobile }: FilterPanelProps) {
                                         onClick={() => handleCategoryToggle(category.id)}
                                         className={`flex w-full items-center gap-2.5 rounded-lg px-2.5 py-2 text-left text-sm transition-colors ${
                                             isSelected
-                                                ? 'bg-gray-900 text-white'
+                                                ? 'bg-primary-500 text-white'
                                                 : 'text-gray-600 hover:bg-gray-50'
                                         }`}
                                     >
@@ -266,7 +266,7 @@ export default function ProductFilters() {
                     <SlidersHorizontal className="h-4 w-4" />
                     Filtrlər
                     {activeCount > 0 && (
-                        <span className="rounded-full bg-gray-900 px-2 py-0.5 text-xs text-white">
+                        <span className="rounded-full bg-primary-500 px-2 py-0.5 text-xs text-white">
                             {activeCount}
                         </span>
                     )}

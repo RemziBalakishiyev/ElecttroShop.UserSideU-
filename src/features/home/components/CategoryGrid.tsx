@@ -38,48 +38,21 @@ const CATEGORY_ICON_MAP: Record<string, LucideIcon> = {
     'məişət-texnikası': Home,
 };
 
+// Smartal palette — clean blue ⇄ orange alternation (no random multi-hue).
 const CATEGORY_THEMES = [
     {
-        iconBg: 'from-violet-500 to-indigo-600',
-        iconShadow: 'shadow-violet-500/30',
-        hoverBorder: 'group-hover:border-violet-200',
-        glow: 'group-hover:shadow-violet-500/10',
-        accent: 'bg-violet-500',
+        iconBg: 'from-primary-500 to-primary-700',
+        iconShadow: 'shadow-primary-500/30',
+        hoverBorder: 'group-hover:border-primary-200',
+        glow: 'group-hover:shadow-primary-500/10',
+        accent: 'bg-primary-500',
     },
     {
-        iconBg: 'from-cyan-500 to-blue-600',
-        iconShadow: 'shadow-cyan-500/30',
-        hoverBorder: 'group-hover:border-cyan-200',
-        glow: 'group-hover:shadow-cyan-500/10',
-        accent: 'bg-cyan-500',
-    },
-    {
-        iconBg: 'from-rose-500 to-pink-600',
-        iconShadow: 'shadow-rose-500/30',
-        hoverBorder: 'group-hover:border-rose-200',
-        glow: 'group-hover:shadow-rose-500/10',
-        accent: 'bg-rose-500',
-    },
-    {
-        iconBg: 'from-amber-500 to-orange-600',
-        iconShadow: 'shadow-amber-500/30',
-        hoverBorder: 'group-hover:border-amber-200',
-        glow: 'group-hover:shadow-amber-500/10',
-        accent: 'bg-amber-500',
-    },
-    {
-        iconBg: 'from-emerald-500 to-teal-600',
-        iconShadow: 'shadow-emerald-500/30',
-        hoverBorder: 'group-hover:border-emerald-200',
-        glow: 'group-hover:shadow-emerald-500/10',
-        accent: 'bg-emerald-500',
-    },
-    {
-        iconBg: 'from-fuchsia-500 to-purple-600',
-        iconShadow: 'shadow-fuchsia-500/30',
-        hoverBorder: 'group-hover:border-fuchsia-200',
-        glow: 'group-hover:shadow-fuchsia-500/10',
-        accent: 'bg-fuchsia-500',
+        iconBg: 'from-accent-500 to-accent-600',
+        iconShadow: 'shadow-accent-500/30',
+        hoverBorder: 'group-hover:border-accent-200',
+        glow: 'group-hover:shadow-accent-500/10',
+        accent: 'bg-accent-500',
     },
 ] as const;
 
@@ -130,7 +103,7 @@ function CategoryCard({ category, index }: CategoryCardProps) {
                 <div className={`absolute top-0 left-0 right-0 h-1 ${theme.accent} scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left`} />
 
                 {hasDiscount && (
-                    <span className="absolute top-3 right-3 rounded-full bg-red-500 px-2 py-0.5 text-[10px] font-bold text-white shadow-sm">
+                    <span className="absolute top-3 right-3 rounded-full bg-accent-500 px-2 py-0.5 text-[10px] font-bold text-white shadow-sm">
                         -{category.discountPercent}%
                     </span>
                 )}

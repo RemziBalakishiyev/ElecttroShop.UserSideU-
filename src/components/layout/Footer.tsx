@@ -8,8 +8,8 @@ export default function Footer() {
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
                     {/* Brand */}
                     <div>
-                        <Link to="/" className="text-2xl font-bold tracking-tight mb-4 block">
-                            Smartal
+                        <Link to="/" className="inline-block bg-white rounded-lg p-2 mb-4">
+                            <img src="/logo.png" alt="Smartal" className="h-20 w-auto" />
                         </Link>
                         <p className="text-gray-400 text-sm">
                             Elektronika məhsullarının satışı ilə məşğul olan modern onlayn mağaza. 

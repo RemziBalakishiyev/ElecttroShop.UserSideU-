@@ -50,7 +50,7 @@ function ProductCard({ product, onAddToCart }: ProductCardProps) {
                     )}
                 </div>
                 {hasDiscount && (
-                    <span className="absolute left-3 top-3 rounded-md bg-red-500 px-2 py-0.5 text-xs font-semibold text-white">
+                    <span className="absolute left-3 top-3 rounded-md bg-accent-500 px-2 py-0.5 text-xs font-semibold text-white">
                         -{product.finalDiscountPercent}%
                     </span>
                 )}
@@ -135,8 +135,8 @@ export default function FeaturedProducts() {
                                 onClick={() => setActiveTab(tab.key)}
                                 className={`rounded-md px-4 py-2 text-sm font-medium whitespace-nowrap transition-colors ${
                                     activeTab === tab.key
-                                        ? 'bg-gray-900 text-white'
-                                        : 'text-gray-500 hover:text-gray-900'
+                                        ? 'bg-primary-500 text-white'
+                                        : 'text-gray-500 hover:text-primary-600'
                                 }`}
                             >
                                 {tab.label}

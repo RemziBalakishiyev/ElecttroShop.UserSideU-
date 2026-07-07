@@ -110,7 +110,7 @@ export default function CheckoutPage() {
                 <div className={`flex items-center gap-2 ${step === 'shipping' ? 'text-black' : 'text-gray-400'}`}>
                     <div
                         className={`w-8 h-8 rounded-full flex items-center justify-center ${
-                            step === 'shipping' ? 'bg-black text-white' : 'bg-gray-200'
+                            step === 'shipping' ? 'bg-primary-500 text-white' : 'bg-gray-200'
                         }`}
                     >
                         1
@@ -121,7 +121,7 @@ export default function CheckoutPage() {
                 <div className={`flex items-center gap-2 ${step === 'payment' ? 'text-black' : 'text-gray-400'}`}>
                     <div
                         className={`w-8 h-8 rounded-full flex items-center justify-center ${
-                            step === 'payment' ? 'bg-black text-white' : 'bg-gray-200'
+                            step === 'payment' ? 'bg-primary-500 text-white' : 'bg-gray-200'
                         }`}
                     >
                         2
