@@ -1,5 +1,5 @@
 import { Link, useNavigate } from 'react-router-dom';
-import { ShoppingCart, User, Search, Menu, Heart } from 'lucide-react';
+import { ShoppingCart, User, Search, Menu, Heart, Phone } from 'lucide-react';
 import { useCart } from '../../context/CartContext';
 import { useAuth } from '../../context/AuthContext';
 import { useWishlist } from '../../context/WishlistContext';
@@ -24,6 +24,16 @@ export default function Header() {
 
     return (
         <header className="sticky top-0 z-50 w-full border-b bg-white/80 backdrop-blur-md">
+            <div className="w-full bg-gray-900 py-2.5 text-center text-sm font-medium text-white">
+                <span className="inline-flex items-center gap-2">
+                    <Phone className="h-4 w-4" />
+                    Əlavə məlumat üçün{' '}
+                    <a href="tel:+994505147200" className="font-semibold underline underline-offset-2 hover:text-gray-300">
+                        +994 50 514 72 00
+                    </a>{' '}
+                    nömrəsinə zəng edin
+                </span>
+            </div>
             <div className="container mx-auto px-4">
                 <div className="flex h-16 items-center justify-between">
                     {/* Logo */}
