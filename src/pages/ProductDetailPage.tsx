@@ -1,7 +1,7 @@
 import { useParams, Link } from 'react-router-dom';
 import { useState, useMemo } from 'react';
 import {
-    Heart, ShoppingCart, ChevronDown, ChevronUp, Check,
+    Heart, ShoppingCart, ChevronDown, ChevronUp, Check, Info,
     Cpu, HardDrive, Monitor, Camera, Battery, Wifi, Bluetooth,
     Layers, Zap, Package, Palette,
 } from 'lucide-react';
@@ -15,6 +15,7 @@ import { resolveProductImage, resolveImageEntry } from '../utils/productImage';
 import { useProductDetail } from '../features/products/hooks/useProductDetail';
 import { useProducts } from '../features/products/hooks/useProducts';
 import type { CategoryAttribute } from '../types/product.types';
+import { WHATSAPP_NUMBER } from '../config/contact';
 
 function formatPrice(amount: number | null | undefined, currency?: string | null) {
     if (amount == null || Number.isNaN(Number(amount))) return null;
@@ -60,7 +61,7 @@ export default function ProductDetailPage() {
     const { showToast } = useToast();
     const [selectedImage, setSelectedImage] = useState(0);
     const [selectedAttributes, setSelectedAttributes] = useState<Record<string, string>>({});
-    const [showDetails, setShowDetails] = useState(true);
+    const [showDetails, setShowDetails] = useState(false);
 
     const { data: product, isLoading, error } = useProductDetail(id || '');
 
@@ -405,7 +406,7 @@ export default function ProductDetailPage() {
                                 </button>
 
                                 <a
-                                    href={`https://wa.me/505147200?text=${encodeURIComponent(`Salam! "${product.name}" məhsulunu almaq istəyirəm.`)}`}
+                                    href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(`Salam! "${product.name}" məhsulunu almaq istəyirəm.\n${window.location.origin}/products/${product.id}`)}`}
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="flex h-14 w-full items-center justify-center gap-2.5 rounded-2xl bg-[#25D366] text-base font-semibold text-white shadow-lg shadow-[#25D366]/30 transition-all duration-200 hover:bg-[#1ebe5d] active:scale-[0.98]"
@@ -461,47 +462,58 @@ export default function ProductDetailPage() {
                     </div>
                 </div>
 
-                {/* ── Details section ── */}
-                {attributes.length > 0 && (
-                    <div className="mb-12 rounded-3xl bg-white p-8 shadow-sm ring-1 ring-gray-100">
-                        <div className="mb-6 flex items-center justify-between">
-                            <h2 className="text-2xl font-bold text-gray-900">Detallar</h2>
-                            <button
-                                onClick={() => setShowDetails(!showDetails)}
-                                className="flex items-center gap-2 rounded-xl border border-gray-200 px-4 py-2 text-sm text-gray-500 transition-all hover:border-gray-300 hover:text-gray-900"
-                            >
-                                {showDetails ? 'Daha az göstər' : 'Daha çox göstər'}
-                                {showDetails ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
-                            </button>
-                        </div>
+                {/* ── Specifications section ── */}
+                {attributes.length > 0 && (() => {
+                    const COLLAPSED_COUNT = 14;
+                    const canCollapse = attributes.length > COLLAPSED_COUNT;
+                    const visibleAttributes = showDetails || !canCollapse
+                        ? attributes
+                        : attributes.slice(0, COLLAPSED_COUNT);
 
-                        {showDetails && (
-                            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-                                {attributes.map((attr) => {
-                                    const Icon = getAttributeIcon(attr.name, attr.attributeType);
-                                    return (
-                                        <div
-                                            key={attr.id}
-                                            className="flex items-start gap-4 rounded-2xl border border-gray-100 bg-gray-50 p-5"
-                                        >
-                                            <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-white shadow-sm ring-1 ring-gray-100">
-                                                <Icon className="h-5 w-5 text-gray-700" />
-                                            </div>
-                                            <div className="min-w-0">
-                                                <div className="mb-0.5 text-xs font-medium uppercase tracking-wide text-gray-400">
-                                                    {attr.displayName}
-                                                </div>
-                                                <div className="break-words text-sm font-semibold text-gray-900">
-                                                    {getAttributeValues(attr) || '—'}
-                                                </div>
-                                            </div>
-                                        </div>
-                                    );
-                                })}
+                    return (
+                        <div className="mb-12 rounded-3xl bg-white p-6 shadow-sm ring-1 ring-gray-100 sm:p-8">
+                            <div className="mb-6 flex flex-wrap items-center justify-between gap-2">
+                                <h2 className="text-2xl font-bold text-gray-900">Xüsusiyyətlər</h2>
+                                <p className="text-sm text-gray-400">
+                                    Uyğunsuzluq aşkar etmisən?{' '}
+                                    <Link to="/contact" className="font-medium text-gray-900 underline underline-offset-2 hover:text-gray-600">
+                                        Bizə yaz
+                                    </Link>
+                                </p>
                             </div>
-                        )}
-                    </div>
-                )}
+
+                            <div className="grid grid-cols-1 gap-x-12 lg:grid-cols-2">
+                                {visibleAttributes.map((attr) => (
+                                    <div
+                                        key={attr.id}
+                                        className="flex items-center justify-between gap-4 border-b border-gray-100 py-3.5"
+                                    >
+                                        <span className="flex items-center gap-1.5 text-sm text-gray-500">
+                                            {attr.displayName}
+                                            <Info className="h-3.5 w-3.5 shrink-0 text-gray-300" aria-hidden="true" />
+                                        </span>
+                                        <span className="text-right text-sm font-medium text-gray-900">
+                                            {getAttributeValues(attr) || '—'}
+                                        </span>
+                                    </div>
+                                ))}
+                            </div>
+
+                            {canCollapse && (
+                                <button
+                                    onClick={() => setShowDetails(!showDetails)}
+                                    className="mt-4 flex w-full items-center justify-center gap-2 rounded-2xl bg-gray-50 py-3.5 text-sm font-medium text-gray-600 transition-colors hover:bg-gray-100 hover:text-gray-900"
+                                >
+                                    {showDetails ? (
+                                        <>Daha az göstər <ChevronUp className="h-4 w-4" /></>
+                                    ) : (
+                                        <>Hamısını göstər <ChevronDown className="h-4 w-4" /></>
+                                    )}
+                                </button>
+                            )}
+                        </div>
+                    );
+                })()}
 
                 {/* ── Related products ── */}
                 {relatedProducts.length > 0 && (

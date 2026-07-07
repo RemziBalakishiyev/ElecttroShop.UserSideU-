@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Facebook, Twitter, Instagram, Linkedin } from 'lucide-react';
+import ContactLinks from '../common/ContactLinks';
 
 export default function Footer() {
     return (
@@ -43,15 +43,10 @@ export default function Footer() {
                         </ul>
                     </div>
 
-                    {/* Socials */}
+                    {/* Contact & Socials */}
                     <div>
-                        <h3 className="font-semibold mb-4">Bizi izləyin</h3>
-                        <div className="flex gap-4">
-                            <a href="#" className="text-gray-400 hover:text-white"><Twitter className="h-5 w-5" /></a>
-                            <a href="#" className="text-gray-400 hover:text-white"><Facebook className="h-5 w-5" /></a>
-                            <a href="#" className="text-gray-400 hover:text-white"><Instagram className="h-5 w-5" /></a>
-                            <a href="#" className="text-gray-400 hover:text-white"><Linkedin className="h-5 w-5" /></a>
-                        </div>
+                        <h3 className="font-semibold mb-4">Əlaqəmiz</h3>
+                        <ContactLinks variant="dark" className="-ml-2" />
                     </div>
                 </div>
                 <div className="mt-12 pt-8 border-t border-gray-800 text-center text-sm text-gray-400">

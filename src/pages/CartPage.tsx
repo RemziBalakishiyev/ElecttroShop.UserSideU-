@@ -6,6 +6,7 @@ import { useToast } from '../context/ToastContext';
 import { getImageUrl } from '../utils/imageUrl';
 import { resolveProductImage } from '../utils/productImage';
 import { Badge } from '../components/common/Badge';
+import { WHATSAPP_NUMBER } from '../config/contact';
 
 export default function CartPage() {
     const { items, totalPrice, updateQuantity, removeFromCart, clearCart } = useCart();
@@ -14,6 +15,25 @@ export default function CartPage() {
     const handleRemove = (productId: string, productName: string) => {
         removeFromCart(productId);
         showToast(`${productName} səbətdən silindi`, 'info');
+    };
+
+    const handleCheckout = () => {
+        const currency = items[0]?.product.currency || 'AZN';
+        const lines = items.map((item, index) => {
+            const price = item.product.finalPrice ?? item.product.price;
+            const lineTotal = (price * item.quantity).toFixed(2);
+            const link = `${window.location.origin}/products/${item.product.id}`;
+            return `${index + 1}. ${item.product.name} (Say: ${item.quantity}) — ${item.product.currency}${lineTotal}\n${link}`;
+        });
+
+        const total = (totalPrice * 1.1).toFixed(2);
+        const message =
+            `Salam! Aşağıdakı məhsulları sifariş etmək istəyirəm:\n\n` +
+            `${lines.join('\n\n')}\n\n` +
+            `Cəmi: ${total} ${currency}`;
+
+        const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+        window.open(url, '_blank', 'noopener,noreferrer');
     };
 
     const handleClearCart = () => {
@@ -165,9 +185,9 @@ export default function CartPage() {
                             </div>
                         </div>
 
-                        <Link to="/checkout">
-                            <Button className="w-full mb-4">Sifarişi tamamla</Button>
-                        </Link>
+                        <Button className="w-full mb-4" onClick={handleCheckout}>
+                            Sifarişi tamamla
+                        </Button>
                         <Link to="/products">
                             <Button variant="outline" className="w-full">
                                 Alış-verişə davam et
